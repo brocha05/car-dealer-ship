@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -20,10 +21,10 @@ export class CarsController {
   }
 
   @Get(':id')//Método get con un id
-  getCarById(@Param('id', ParseIntPipe) id: number) {//Obtiene el param con el decorador @Param()
+  getCarById(@Param('id', ParseUUIDPipe) id: string) {//Obtiene el param con el decorador @Param()
     //y además utiliza un pipe para convertir el valor en entero 'ParseIntPipe' si no es algo que se 
     //Pueda convertir tira un error.
-    return this.carsService.getCarById(+id); //Ejecuta getCarById pasando el id como parametro y lo invoca
+    return this.carsService.getCarById(id); //Ejecuta getCarById pasando el id como parametro y lo invoca
     //desde el método del servicio
   }
 
@@ -38,7 +39,7 @@ export class CarsController {
   }
 
   @Delete(':id')//Método delete que sirve para eliminar datos.
-  deleteCar(@Param('id', ParseIntPipe) id: number) {
+  deleteCar(@Param('id', ParseUUIDPipe) id: string) {
     return{
       method: 'delete',
       id
