@@ -13,9 +13,10 @@ import {
 } from '@nestjs/common';
 import { CarsService } from './cars.service';//Importación del servicio para inyectarlo en el constructor de la clase
 import { CreateCarDto } from './dto/create-car.dto';
+import { UpdateCarDto } from './dto/update-car.dto';
 
 @Controller('cars')//Controlador cars 
-@UsePipes(ValidationPipe) //Impregna al controlador con ValidationPipe, requiere Class Validator para funcionar
+// @UsePipes(ValidationPipe) //Impregna al controlador con ValidationPipe, requiere Class Validator para funcionar
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}//Inyectando el servicio cars para acceder a las propiedades.
 
@@ -34,19 +35,19 @@ export class CarsController {
 
   @Post()//Método Post que sirve para CREAR recursos
   createCar(@Body() createCarDto: CreateCarDto) {
-    return { createCarDto };
+    return this.carsService.createCarDto(createCarDto)
   }
 
   @Patch(':id')//Método Patch que sirve para actualizar datos
-  updateCar(@Body() body) {
-    return { body };
+  updateCar(
+    @Body() updateCarDto:UpdateCarDto,
+    @Param('id', ParseUUIDPipe) id: string
+    ) {
+    return this.carsService.updateCar(id, updateCarDto)
   }
 
   @Delete(':id')//Método delete que sirve para eliminar datos.
   deleteCar(@Param('id', ParseUUIDPipe) id: string) {
-    return{
-      method: 'delete',
-      id
-    }
+    this.carsService.deleteCar(id)
   }
 }
