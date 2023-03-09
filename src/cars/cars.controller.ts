@@ -10,6 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';//Importación del servicio para inyectarlo en el constructor de la clase
+import { CreateCarDto } from './dto/create-car.dto';
 
 @Controller('cars')//Controlador cars 
 export class CarsController {
@@ -29,8 +30,8 @@ export class CarsController {
   }
 
   @Post()//Método Post que sirve para CREAR recursos
-  createCar(@Body() body) {
-    return { body };
+  createCar(@Body() createCarDto: CreateCarDto) {
+    return { createCarDto };
   }
 
   @Patch(':id')//Método Patch que sirve para actualizar datos
