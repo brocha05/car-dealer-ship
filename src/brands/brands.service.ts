@@ -12,7 +12,7 @@ export class BrandsService {
     return `This action returns all brands`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} brand`;
   }
 
