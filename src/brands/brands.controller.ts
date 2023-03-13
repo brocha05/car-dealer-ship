@@ -27,8 +27,8 @@ export class BrandsController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.brandsService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.brandsService.findOne(+id);
   }
 
   @Patch(':id')
@@ -37,7 +37,7 @@ export class BrandsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.brandsService.remove(+id);
+  remove(@Param('id', ParseUUIDPipe) id: string) {
+    return this.brandsService.remove(id);
   }
 }

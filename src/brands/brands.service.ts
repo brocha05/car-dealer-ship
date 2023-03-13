@@ -12,7 +12,7 @@ export class BrandsService {
     return `This action returns all brands`;
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     return `This action returns a #${id} brand`;
   }
 
@@ -20,7 +20,7 @@ export class BrandsService {
     return `This action updates a #${id} brand`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} brand`;
   }
 }
